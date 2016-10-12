@@ -1,4 +1,4 @@
-rlwrap sqlplus lortole/FRANCOI@venus/master
+rlwrap sqlplus lortole/motdepasse@venus/master
 
 @00_Delete_BD_Communes.sql
 @01_Create_BD_Communes.sql
@@ -6,8 +6,8 @@ rlwrap sqlplus lortole/FRANCOI@venus/master
 @03_Update_BD_Communes.sql
 @05_Trigger_BD_Communes.sql
 
-sqlldr userid=lortole/FRANCOI@venus/master control=Region_ctl.txt
-sqlldr userid=lortole/FRANCOI@venus/master control=Departement_ctl.txt
-sqlldr userid=lortole/FRANCOI@venus/master control=Commune_ctl.txt
+sqlldr userid=lortole/motdepasse@venus/master control=Region_ctl.txt
+sqlldr userid=lortole/motdepasse@venus/master control=Departement_ctl.txt
+sqlldr userid=lortole/motdepasse@venus/master control=Commune_ctl.txt
 
 show errors ;
