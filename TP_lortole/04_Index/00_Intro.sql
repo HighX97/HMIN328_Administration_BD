@@ -15,18 +15,18 @@ FROM index_stats;
 ANALYZE INDEX PK_COMMUNE VALIDATE STRUCTURE
 ;
 
-SELECT name, lf_rows , height
+SELECT name, btree_space, most_repeated_key, lf_rows, br_rows, height , br_blks
 FROM index_stats;
 
 ANALYZE INDEX PK_DEPARTEMENT VALIDATE STRUCTURE
 ;
 
-SELECT name, lf_rows , height
+SELECT name, btree_space, most_repeated_key, lf_rows, br_rows, height , br_blks
 FROM index_stats;
 
 ANALYZE INDEX PK_ALBUM VALIDATE STRUCTURE;
 
-SELECT name, lf_rows , height
+SELECT name, btree_space, most_repeated_key, lf_rows, br_rows, height , br_blks
 FROM index_stats;
 
 
