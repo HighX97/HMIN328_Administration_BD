@@ -69,22 +69,94 @@ ANALYZE INDEX PK_COMMUNE VALIDATE STRUCTURE
 SELECT name , lf_blks + br_blks as nb_blks
 FROM index_stats;
 
-ANALYZE TABLE COMMUNE compute statistics;
 
-SELECT num_rows , avg_row_len, blocks , empty_blocks
-FROM user_tables
-WHERE table_name = 'COMMUNE';
 
 /*
 6. Quelle est la taille de chaque tuple (cle, pointeurs, rowid) pr ́esent au niveau des blocs des feuilles
 (on consid`ere que les blocs sont pleins) ?
 */
-
 /*
 7. Par comparaison, quelle est la taille moyenne de chaque tuple de la table COMMUNE et combien
 de tuples peuvent ˆetre stock ́es dans un bloc (tenir compte de l’espace libre et donc de la valeur
 de PCT FREE de la vue USER TABLES) ?
 */
+
+ANALYZE TABLE COMMUNE compute statistics;
+
+SELECT num_rows , avg_row_len, blocks , empty_blocks , pct_free , initial_extent , next_extent , tablespace_name
+FROM user_tables
+WHERE table_name = 'COMMUNE';
+
+ANALYZE TABLE DEPARTEMENT compute statistics;
+
+SELECT num_rows , avg_row_len, blocks , empty_blocks , pct_free , initial_extent , next_extent , tablespace_name
+FROM user_tables
+WHERE table_name = 'DEPARTEMENT';
+
+ANALYZE TABLE REGION compute statistics;
+
+SELECT num_rows , avg_row_len, blocks , empty_blocks , pct_free , initial_extent , next_extent , tablespace_name
+FROM user_tables
+WHERE table_name = 'REGION';
+
+
+select name , value from v$parameter where name like '%block%' ;
+
+select value from v$parameter where name like 'db_block_size' ;
+
+
+
+ANALYZE TABLE COMMUNE compute statistics;
+
+
+SELECT  NUM_ROWS * AVG_ROW_LEN as memory_use_avg
+FROM user_tables
+WHERE table_name = 'COMMUNE'
+;
+
+SELECT  blocks * value as memory_use
+FROM user_tables , v$parameter
+WHERE table_name = 'COMMUNE' and  name like 'db_block_size'
+;
+
+SELECT  NUM_ROWS * AVG_ROW_LEN as memory_use_avg , blocks * value as memory_use , (blocks * value) - (NUM_ROWS * AVG_ROW_LEN) as memory_diff
+FROM user_tables , v$parameter
+WHERE table_name = 'COMMUNE' and  name like 'db_block_size'
+;
+
+ANALYZE TABLE DEPARTEMENT compute statistics;
+
+SELECT  NUM_ROWS * AVG_ROW_LEN as memory_use_avg
+FROM user_tables
+WHERE table_name = 'DEPARTEMENT'
+;
+
+SELECT  blocks * value as memory_use
+FROM user_tables , v$parameter
+WHERE table_name = 'DEPARTEMENT' and  name like 'db_block_size'
+;
+
+SELECT  NUM_ROWS * AVG_ROW_LEN as memory_use_avg , blocks * value as memory_use , (blocks * value) - (NUM_ROWS * AVG_ROW_LEN) as memory_diff
+FROM user_tables , v$parameter
+WHERE table_name = 'DEPARTEMENT' and  name like 'db_block_size'
+;
+
+ANALYZE TABLE REGION compute statistics;
+
+SELECT  NUM_ROWS * AVG_ROW_LEN as memory_use_avg
+FROM user_tables
+WHERE table_name = 'REGION'
+;
+
+SELECT  blocks * value as memory_use
+FROM user_tables , v$parameter
+WHERE table_name = 'REGION' and  name like 'db_block_size'
+;
+
+SELECT  NUM_ROWS * AVG_ROW_LEN as memory_use_avg , blocks * value as memory_use , (blocks * value) - (NUM_ROWS * AVG_ROW_LEN) as memory_diff
+FROM user_tables , v$parameter
+WHERE table_name = 'REGION' and  name like 'db_block_size'
+;
 
 /*
 8. Calculer le nombre de blocs th ́eorique n ́ecessaire au stockage de l’ensemble des tuples de la table
@@ -95,6 +167,8 @@ calcul ́e vous semble-t’il r ́ealiste ?
 /*
 9. Dans quel espace de tables est organis ́e logiquement l’index COMMUNE PK ?
 */
+
+DESC user_indexes ;
 
 /*
 10. Quel est l’espace de stockage (en Moctets) n ́ecessaire pour la table COMMUNE ? Quel espace
