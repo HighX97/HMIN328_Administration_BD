@@ -35,3 +35,7 @@ col table_name for a20 ;
 
 SELECT index_name , table_name , blevel , LEAF_BLOCKS , uniqueness
 from user_indexes ;
+
+
+SELECT name, btree_space, most_repeated_key, lf_rows, br_rows,lf_rows_len, br_rows_len,lf_blks, br_blks, height
+FROM index_stats;
