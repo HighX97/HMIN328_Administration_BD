@@ -250,9 +250,69 @@ select plan_table_output from table(dbms_xplan.display()) ;
 5. donnez le nombre de communes par numéro et nom de département
 */
 
+select D.dep , D.nom_dep , count(C.code_insee)
+from commune C , departement D
+where C.dep = D.dep
+group by D.dep, D.nom_dep
+;
 
+explain plan for select D.dep , D.nom_dep , count(C.code_insee)
+from commune C , departement D
+where C.dep = D.dep
+group by D.dep, D.nom_dep
+;
+select plan_table_output from table(dbms_xplan.display()) ;
 
 
 /*
+
+PLAN_TABLE_OUTPUT
+--------------------------------------------------------------------------------
+Plan hash value: 3506396006
+
+--------------------------------------------------------------------------------
+---
+
+| Id  | Operation	    | Name	  | Rows  | Bytes | Cost (%CPU)| Time
+  |
+
+--------------------------------------------------------------------------------
+---
+
+
+PLAN_TABLE_OUTPUT
+--------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT    |		  |  6857 |   100K|   586   (1)| 00:00:0
+8 |
+
+|   1 |  HASH GROUP BY	    |		  |  6857 |   100K|   586   (1)| 00:00:0
+8 |
+
+|*  2 |   HASH JOIN	    |		  | 36318 |   532K|   584   (1)| 00:00:0
+8 |
+
+|   3 |    TABLE ACCESS FULL| DEPARTEMENT |   101 |  1313 |	3   (0)| 00:00:0
+1 |
+
+PLAN_TABLE_OUTPUT
+--------------------------------------------------------------------------------
+
+|   4 |    TABLE ACCESS FULL| COMMUNE	  | 36318 | 72636 |   581   (1)| 00:00:0
+7 |
+
+--------------------------------------------------------------------------------
+---
+
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+
+PLAN_TABLE_OUTPUT
+--------------------------------------------------------------------------------
+   2 - access("C"."DEP"="D"."DEP")
+
+16 rows selected.
+
 
 */
