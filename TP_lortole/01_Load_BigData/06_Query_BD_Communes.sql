@@ -23,7 +23,7 @@ GROUP BY nom_dep
 SELECT R.chef_lieu, nom_reg, nom_dep , D.chef_lieu
 FROM Region R, Departement D
 WHERE R.chef_lieu = D.chef_lieu
-ORDER BY R.chef_lieu 
+ORDER BY R.chef_lieu
 ;
 
 SELECT chef_lieu
@@ -51,8 +51,8 @@ SELECT chef_lieu
 FROM Region
 ;
 
-SELECT nom_com 
-FROM Commune 
+SELECT nom_com
+FROM Commune
 WHERE code_insee NOT IN (SELECT chef_lieu FROM Departement)
 AND code_insee  IN (SELECT chef_lieu FROM Region)
 ;
@@ -75,8 +75,8 @@ SELECT chef_lieu
 FROM Departement
 ;
 
-SELECT nom_com 
-FROM Commune 
+SELECT nom_com
+FROM Commune
 WHERE code_insee IN (SELECT chef_lieu FROM Departement)
 AND code_insee NOT IN (SELECT chef_lieu FROM Region)
 ;
@@ -177,7 +177,7 @@ ORDER BY pop_2010
 
 
 /*
-11. Nom, population en 1975 et population en 2010 des communes de Languedoc-Roussillon 
+11. Nom, population en 1975 et population en 2010 des communes de Languedoc-Roussillon
 (triées par ordre alphabetique) qui ont connu une diminution de population entre 1975 et 2010
 */
 

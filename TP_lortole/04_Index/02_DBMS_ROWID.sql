@@ -39,6 +39,7 @@ t'il en accord avec les informations collect ́ees dans la vue user tables
 
 SELECT DBMS_ROWID.ROWID_BLOCK_NUMBER(B.rowid) as numBlock,
 DBMS_ROWID.ROWID_OBJECT(B.rowid) as numTable,
+DBMS_ROWID.ROWID_ROW_NUMBER(A.rowid) as posBlock,
 b.nom_com
 FROM Commune A , Commune B
 where A.code_insee = '34172'
@@ -46,6 +47,7 @@ and DBMS_ROWID.ROWID_ROW_NUMBER(A.rowid) = DBMS_ROWID.ROWID_ROW_NUMBER(B.rowid);
 
 SELECT DBMS_ROWID.ROWID_BLOCK_NUMBER(B.rowid) as numBlock,
 DBMS_ROWID.ROWID_OBJECT(B.rowid) as numTable,
+DBMS_ROWID.ROWID_ROW_NUMBER(A.rowid) as posBlock,
 b.nom_com
 FROM Commune A , Commune B
 where A.code_insee = '34172'
