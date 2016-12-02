@@ -16,7 +16,7 @@ table Commune
 ALTER TABLE Commune
 add
 (
-	code_insee varchar(6) 
+	code_insee varchar(6)
 )
 ;
 /*
@@ -29,13 +29,13 @@ SET code_insee = CONCAT(dep,com)
 /*
 Vous définirez une contrainte de clé primaire portant sur cet attribut code insee
 */
-ALTER TABLE Commune	
+ALTER TABLE Commune
 DROP PRIMARY KEY
 ;
 
-ALTER TABLE Commune	
+ALTER TABLE Commune
 add
-( 
+(
 CONSTRAINT pk_Commune
 PRIMARY KEY (code_insee)
 )
@@ -45,11 +45,14 @@ Le schéma de la base de données comprend une redondance (attribut reg) qu’il
 supprimer par souci d’efficacité. Cette redondance provient du contenu du fichier tabulé des
 données sur les communes exploité.
 */
-ALTER TABLE Commune	
+ALTER TABLE Commune
 DROP COLUMN reg
 ;
 /*
 */
 
 ALTER TABLE Commune ENABLE CONSTRAINT fk_Commune_Dept
+;
+
+ALTER TABLE Departement ENABLE CONSTRAINT pk_Departement
 ;
