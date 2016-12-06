@@ -435,7 +435,7 @@ ES'
 
 select nom_com , nom_dep
 from commune C , departement D
-where  C.dep = D.dep and D.reg=RR.reg and
+where  C.dep = D.dep  and
 D.reg in (select reg
   from region R
   where R.nom_reg='LANGUEDOC-ROUSSILLON' or R.nom_reg = 'PROVENCE-ALPES-COTE D''AZUR' or R.nom_reg='MIDI-PYRENEES')
@@ -443,7 +443,7 @@ D.reg in (select reg
 
 explain plan for select nom_com , nom_dep
 from commune C , departement D
-where  C.dep = D.dep and D.reg=RR.reg and
+where  C.dep = D.dep and
 D.reg in (select reg
   from region R
   where R.nom_reg='LANGUEDOC-ROUSSILLON' or R.nom_reg = 'PROVENCE-ALPES-COTE D''AZUR' or R.nom_reg='MIDI-PYRENEES')
@@ -522,8 +522,67 @@ ES'
 */
 
 
-select nom_com
+explain plan for select /*+ ordered */ nom_com , nom_dep
 from commune C , departement D
+where  C.dep = D.dep and
+D.reg in (select reg
+  from region R
+  where R.nom_reg='LANGUEDOC-ROUSSILLON' or R.nom_reg = 'PROVENCE-ALPES-COTE D''AZUR' or R.nom_reg='MIDI-PYRENEES')
+
+select plan_table_output from table(dbms_xplan.display()) ;
+
+
+
+/*
+
+PLAN_TABLE_OUTPUT
+--------------------------------------------------------------------------------
+Plan hash value: 70998721
+
+--------------------------------------------------------------------------------
+-----
+
+| Id  | Operation	      | Name	    | Rows  | Bytes | Cost (%CPU)| Time
+    |
+
+--------------------------------------------------------------------------------
+-----
+
+
+PLAN_TABLE_OUTPUT
+--------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT      | 	    |	407K|	 11M|  1746   (1)| 00:00
+:21 |
+
+|*  1 |  HASH JOIN	      | 	    |	407K|	 11M|  1746   (1)| 00:00
+:21 |
+
+|   2 |   TABLE ACCESS FULL   | DEPARTEMENT |	101 |	202 |	  3   (0)| 00:00
+:01 |
+
+|   3 |   MERGE JOIN CARTESIAN| 	    |	108K|  2979K|  1741   (1)| 00:00
+:21 |
+
+PLAN_TABLE_OUTPUT
+--------------------------------------------------------------------------------
+
+|*  4 |    TABLE ACCESS FULL  | REGION	    |	  3 |	 42 |	  3   (0)| 00:00
+:01 |
+
+|   5 |    BUFFER SORT	      | 	    | 36318 |	496K|  1738   (1)| 00:00
+:21 |
+
+|*  6 |     TABLE ACCESS FULL | COMMUNE     | 36318 |	496K|	579   (0)| 00:00
+:07 |
+
+--------------------------------------------------------------------------------
+
+
+*/
+
+
+select nom_com
+from commune C
 where  C.dep in (select dep
   from departement R
   where D.reg in (select reg
