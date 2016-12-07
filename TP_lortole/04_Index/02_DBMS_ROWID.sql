@@ -73,6 +73,69 @@ end ;
 
 set serveroutput on ;
 execute proc_get_commune_block('34172');
+/*
+get_commune_block 360535    383165    MONTELS
+get_commune_block 360535    383165    MONTESQUIEU
+get_commune_block 360535    383165    MONTFERRIER-SUR-LEZ
+get_commune_block 360535    383165    AUMES
+get_commune_block 360535    383165    MONTOULIERS
+get_commune_block 360535    383165    MONTOULIEU
+get_commune_block 360535    383165    MONTPELLIER
+get_commune_block 360535    383165    MONTPEYROUX
+get_commune_block 360535    383165    MOULES-ET-BAUCELS
+get_commune_block 360535    383165    MOUREZE
+get_commune_block 360535    383165    MUDAISON
+get_commune_block 360535    383165    MURLES
+get_commune_block 360535    383165    MURVIEL-LES-BEZIERS
+get_commune_block 360535    383165    MURVIEL-LES-MONTPELLIER
+get_commune_block 360535    383165    AUTIGNAC
+get_commune_block 360535    383165    NEBIAN
+get_commune_block 360535    383165    NEFFIES
+get_commune_block 360535    383165    NEZIGNAN-L'EVEQUE
+
+PL/SQL procedure successfully completed.
+
+*/
+
+
+/*
+
+select code_insee from commune where nom_com like 'AUTIGNAC' ;
+
+CODE_I
+------
+34018
+
+
+*/
+execute proc_get_commune_block('34018');
+
+
+/*
+
+get_commune_block 360535    383165    MONTELS
+get_commune_block 360535    383165    MONTESQUIEU
+get_commune_block 360535    383165    MONTFERRIER-SUR-LEZ
+get_commune_block 360535    383165    AUMES
+get_commune_block 360535    383165    MONTOULIERS
+get_commune_block 360535    383165    MONTOULIEU
+get_commune_block 360535    383165    MONTPELLIER
+get_commune_block 360535    383165    MONTPEYROUX
+get_commune_block 360535    383165    MOULES-ET-BAUCELS
+get_commune_block 360535    383165    MOUREZE
+get_commune_block 360535    383165    MUDAISON
+get_commune_block 360535    383165    MURLES
+get_commune_block 360535    383165    MURVIEL-LES-BEZIERS
+get_commune_block 360535    383165    MURVIEL-LES-MONTPELLIER
+get_commune_block 360535    383165    AUTIGNAC
+get_commune_block 360535    383165    NEBIAN
+get_commune_block 360535    383165    NEFFIES
+get_commune_block 360535    383165    NEZIGNAN-L'EVEQUE
+
+PL/SQL procedure successfully completed.
+
+
+*/
 
 select blocks, avg_row_len from user_tables where table_name ='COMMUNE';
 
