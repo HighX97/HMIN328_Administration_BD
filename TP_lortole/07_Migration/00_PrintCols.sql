@@ -24,3 +24,27 @@ END;
 
 exec print_columns ('EMP')
 
+/*
+
+Record: NUM
+Record: NUM
+Record: NOM
+Record: NOM
+Record: PRENOM
+Record: PRENOM
+Record: FONCTION
+Record: FONCTION
+Record: SALAIRE
+Record: SALAIRE
+Record: COMMISSION
+Record: COMMISSION
+Record: DATE_EMBAUCHE
+Record: DATE_EMBAUCHE
+Record: N_SUP
+Record: N_SUP
+Record: N_DEP
+Record: N_DEP
+
+PL/SQL procedure successfully completed.
+
+*/
