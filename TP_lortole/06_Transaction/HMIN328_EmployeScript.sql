@@ -30,7 +30,7 @@ create table emp (
 num number constraint employe_pk primary key,
 nom varchar(20),
 prenom varchar(15),
-fonction varchar(20) constraint job_fk references fonction(nom_f) 
+fonction varchar(20) constraint job_fk references fonction(nom_f)
 deferrable initially deferred,
 salaire float,
 commission float,
@@ -149,7 +149,7 @@ insert into emp values (76,'Nonrancer','Noemie','designer',2900,null,'16/3/96',2
 insert into emp values (77,'Mercer','Clement','designer',3900,null,'16/3/96',2,3);
 insert into emp values (78,'Mercerez','Clemence','designer',3900,null,'16/3/96',2,3);
 insert into emp values (79,'Merceriaz','Caroline','designer',3900,null,'16/3/96',2,3);
-insert into emp values (80,'Merceran','Chloe','designer',3900,null,'16/3/96',2,3);
+insert into emp values (80,'Merceran','Chloe','designer',3900,null,null,2,3);
 
 
 insert into vente values (1,'hobby cat',1,sysdate,5000,44);
@@ -163,4 +163,3 @@ insert into vente values (8,'10m',1,sysdate,25000,10);
 
 
 commit;
-
